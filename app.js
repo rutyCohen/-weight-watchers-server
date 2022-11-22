@@ -19,6 +19,7 @@ const user = require('./router/user.router');
 const diary = require('./router/diary.router');
 const meeting = require("./router/meeting.router");
 const account = require('./router/account.router');
+const group = require('./router/group.router');
 process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0
 
 app.use(express.static('static'));
@@ -64,6 +65,7 @@ app.use('/api/user', user);
 app.use('/api/diary', diary);
 app.use("/api/meeting", meeting);
 app.use('/api/account', account);
+app.use('/api/group', group);
 
 app.use((err, req, res, next) => {
     if (ENVIRONMENT === 'development')
