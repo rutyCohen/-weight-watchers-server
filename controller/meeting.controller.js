@@ -1,4 +1,4 @@
-const service = require('../service.mongoose/meeting.service');
+const service = require('../service/meeting.service');
 
 module.exports = {
     getAllMeetings: async (req, res, next) => {
