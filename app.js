@@ -1,13 +1,13 @@
 require('dotenv').config();
 const express = require('express');
 const app = express();
-const db = require('./DB/mongoose');
+const db = require('./mongoose');
 const { PORT, ENVIRONMENT, SECRET, BASEURL, CLIENTID, ISSUERBASEASEURL, SESSION_SECRET } = require('./config');
 const logger = require('./configuration');
 const path = require('path');
 const cors = require('cors');
-const swaggerUi = require("swagger-ui-express");
-swaggerDocument = require("./swagger.json");
+// const swaggerUi = require("swagger-ui-express");
+// swaggerDocument = require("./swagger.json");
 const { auth } = require('express-openid-connect');
 const expressSession = require("express-session");
 const passport = require("passport");
@@ -20,6 +20,8 @@ const diary = require('./router/diary.router');
 const meeting = require("./router/meeting.router");
 const account = require('./router/account.router');
 const group = require('./router/group.router');
+const manager = require('./router/manager.router');
+
 process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0
 
 app.use(express.static('static'));
@@ -43,7 +45,7 @@ db.connect();
 //   } else {
 //     res.send('Logged out');
 //   }
-  
+
 // });
 
 // const session = {
@@ -66,11 +68,12 @@ app.use('/api/diary', diary);
 app.use("/api/meeting", meeting);
 app.use('/api/account', account);
 app.use('/api/group', group);
+app.use('/api/manager', manager);
 
 app.use((err, req, res, next) => {
     if (ENVIRONMENT === 'development')
         logger.error(err.message)
-    if(err.message=='user validation failed: email: Please enter a valid email')
+    if (err.message == 'user validation failed: email: Please enter a valid email')
         res.status(400).send(err.message);
     else {
         res.status(500).send(err.message)
@@ -78,10 +81,10 @@ app.use((err, req, res, next) => {
     next();
 })
 
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+// app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use((req, res) => {
-  res.status(404).sendFile(path.join(__dirname, './static/404.html'));
+    res.status(404).sendFile(path.join(__dirname, './static/404.html'));
 });
 
 // app.get('/profile', requiresAuth(), (req, res) => {

@@ -3,11 +3,7 @@ const mongoose = require("mongoose");
 const { isEmail } = require('validator')
 
 const userSchema = mongoose.Schema({
-    firstName: {
-        type: String,
-        minlength: 2
-    },
-    lastName: {
+    name: {
         type: String,
         minlength: 2
     },
@@ -16,26 +12,23 @@ const userSchema = mongoose.Schema({
         minlength: 7,
         maxlength: 10
     },
-    address: {
-        city: { type: String },
-        street: { type: String },
-        number: { type: Number, min: 1 }
-    },
     email: {
         type: String,
         unique: true,
-        validate: [isEmail, 'please insert valid'],
-        // match: [/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/, 'Please fill a valid email address']
+        validate: [isEmail, 'please insert valid email'],
     },
     height: {
         type: Number,
         minlength: 2,
         maxlength: 3
     },
-    startWeight: {
+    weight: {
         type: Number,
         minlength: 2,
         maxlength: 3
+    },
+    rule: {
+        type: String,
     },
 }, { timestamps: true })
 

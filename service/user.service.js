@@ -1,41 +1,36 @@
-const fs = require('fs/promises')
-const getData = async () => {
-    const data = await fs.readFile('./dataFile.json');
-    return await JSON.parse(data);
-  };
-  
-const setData = async(data) => fs.writeFile('./dataFile.json', JSON.stringify(data));
-module.exports = {
+const { ObjectId } = require('mongodb');
+const userModel = require('../models/user.model');
 
+module.exports = {
     getAllUsers: async () => {
-        const data = await getData();
-        return data.users;
-    },
-    MeansOfIdentification: async (meansOfIdentification) => {
-        let data = await getData();
-        return data = data.users.find(user => user.email === meansOfIdentification || user.phone === meansOfIdentification); 
+        return userModel.find();
+
     },
     getUserById: async (id) => {
-        let data = await getData();
-        return data = data.users.find(user => user.email === id);
-    },
-    updateUser: async (id, userToUpdate) => {
-        debugger
-        let data = await getData();
-        let index = data.users.indexOf(user => user.id === id);
-        data.users[index + 1] = userToUpdate;
-        return await setData(data);
+        return userModel.findOne({ _id: id });
     },
     createUser: async (user) => {
-        let data = await getData();
-        data.users.push(user);
-        return await setData(data);
+        const newUser = await new userModel(user);
+        await newUser.save();
     },
     deleteUser: async (id) => {
-        let data = await getData();
-        let index = data.users.indexOf(user => user.id === id);
-        data.users.splice(index, 1);
-        return await setData(data);
-    }
+        return userModel.deleteOne({ _id: ObjectId(id) });
+    },
+    updateUser: async (id, user) => {
+        const { firstName, lastName, address, startWeight, height, phone, email } = user;
+        await userModel.updateOne({ _id: id },
+            {
+                $set:
+                {
+                    firstName: firstName,
+                    lastName: lastName,
+                    address: address,
+                    email: email,
+                    phone: phone,
+                    height: height,
+                    startWeight: startWeight,
+                }
+            });
+    },
 }
 
