@@ -3,8 +3,8 @@ const service = require('../service/user.service');
 module.exports = {
     getAllUsers: async (req, res, next) => {
         try {
-                const users = await service.getAllUsers();
-                res.send(users);
+            const users = await service.getAllUsers();
+            res.send(users);
         }
         catch (error) {
             next(error)

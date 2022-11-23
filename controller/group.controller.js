@@ -3,8 +3,8 @@ const service = require('../service/group.service');
 module.exports = {
     getAllGroups: async (req, res, next) => {
         try {
-                const groups = await service.getAllGroups();
-                res.send(groups);
+            const groups = await service.getAllGroups();
+            res.send(groups);
         }
         catch (error) {
             next(error)

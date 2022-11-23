@@ -1,4 +1,3 @@
- 
 const userService = require('../user.service');
 const accountService = require('../account.service');
 const userModel = require('../../models/user.model');
