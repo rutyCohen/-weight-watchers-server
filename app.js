@@ -18,7 +18,6 @@ const { requiresAuth } = require('express-openid-connect');
 const user = require('./router/user.router');
 const diary = require('./router/diary.router');
 const meeting = require("./router/meeting.router");
-const account = require('./router/account.router');
 const group = require('./router/group.router');
 const manager = require('./router/manager.router');
 
@@ -66,7 +65,6 @@ app.use(express.json());
 app.use('/api/user', user);
 app.use('/api/diary', diary);
 app.use("/api/meeting", meeting);
-app.use('/api/account', account);
 app.use('/api/group', group);
 app.use('/api/manager', manager);
 
