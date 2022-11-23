@@ -1,4 +1,4 @@
-const service = require('../service.mongoose/group.service');
+const service = require('../service/group.service');
 
 module.exports = {
     getAllGroups: async (req, res, next) => {

@@ -1,4 +1,4 @@
-const service = require('../service.mongoose/user.service');
+const service = require('../service/user.service');
 
 module.exports = {
     getAllUsers: async (req, res, next) => {

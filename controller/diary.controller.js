@@ -1,4 +1,4 @@
-const service = require('../service.mongoose/diary.service');
+const service = require('../service/diary.service');
 
 module.exports = {
     getDiaryUser: async (req, res, next) => {
