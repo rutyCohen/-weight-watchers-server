@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const groupSchema = mongoose.Schema({
-    groupID: { type: mongoose.Schema.Types.ObjectId, require: true, ref: 'group' },
+    managerID: { type: mongoose.Schema.Types.ObjectId, require: true, ref: 'manager' },
     startDate: { type: Date, require: true },
     numberOfParticipants: { type: Number, require: true },
     isActive: { type: Boolean, require: false }
