@@ -1,3 +1,4 @@
+const { Decimal128 } = require("mongodb");
 const mongoose = require("mongoose");
 
 const { isEmail } = require('validator')
@@ -18,17 +19,14 @@ const userSchema = mongoose.Schema({
         validate: [isEmail, 'please insert valid email'],
     },
     height: {
-        type: Number,
+        type: Decimal128,
         minlength: 2,
         maxlength: 3
     },
     weight: {
-        type: Number,
+        type: Decimal128,
         minlength: 2,
         maxlength: 3
-    },
-    rule: {
-        type: String,
     },
 }, { timestamps: true })
 
