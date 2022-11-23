@@ -35,8 +35,8 @@ module.exports = {
     createManager: async (req, res, next) => {
         try {
             const manager = req.body;
-            await service.createManager(manager);
-            res.status(200).json('post manager successfully');
+            const managerId = await service.createManager(manager);
+            res.status(200).json(managerId);
         }
         catch (error) {
             next(error)

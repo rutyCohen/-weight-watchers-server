@@ -18,13 +18,10 @@ const { requiresAuth } = require('express-openid-connect');
 const user = require('./router/user.router');
 const diary = require('./router/diary.router');
 const meeting = require("./router/meeting.router");
-const account = require('./router/account.router');
 const group = require('./router/group.router');
 const manager = require('./router/manager.router');
 
 process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0
-
-app.use(express.static('static'));
 db.connect();
 
 // const config = {
@@ -66,7 +63,6 @@ app.use(express.json());
 app.use('/api/user', user);
 app.use('/api/diary', diary);
 app.use("/api/meeting", meeting);
-app.use('/api/account', account);
 app.use('/api/group', group);
 app.use('/api/manager', manager);
 
@@ -82,10 +78,6 @@ app.use((err, req, res, next) => {
 })
 
 // app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-
-app.use((req, res) => {
-    res.status(404).sendFile(path.join(__dirname, './static/404.html'));
-});
 
 // app.get('/profile', requiresAuth(), (req, res) => {
 //   res.send(JSON.stringify(req.oidc.user));
