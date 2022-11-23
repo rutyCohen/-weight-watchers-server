@@ -10,8 +10,8 @@ module.exports = {
         return managerModel.findOne({ _id: id });
     },
     createManager: async (manager) => {
-        const newManager = await new managerModel(manager);
-        await newManager.save();
+        const newManager = await new managerModel(manager).save();
+        return newManager._id;
     },
     deleteManager: async (id) => {
         return managerModel.deleteOne({ _id: ObjectId(id) });
