@@ -17,18 +17,16 @@ module.exports = {
         return managerModel.deleteOne({ _id: ObjectId(id) });
     },
     updateManager: async (id, manager) => {
-        const { firstName, lastName, address, startWeight, height, phone, email } = manager;
+        const { name, phone, email, description, numOfMembers } = manager;
         await managerModel.updateOne({ _id: id },
             {
                 $set:
                 {
-                    firstName: firstName,
-                    lastName: lastName,
-                    address: address,
+                    name:name,
                     email: email,
                     phone: phone,
-                    height: height,
-                    startWeight: startWeight,
+                    description:description,
+                    numOfMembers:numOfMembers
                 }
             });
     },
