@@ -4,10 +4,10 @@ const groupModel = require('../models/group.model');
 module.exports = {
     getAllGroups: async () => {
         return groupModel.find();
-
     },
     getGroupById: async (id) => {
-        return groupModel.findOne({ _id: id });
+        const group = await groupModel.findOne({ managerID: ObjectId(id)});
+        return group
     },
     createGroup: async (group) => {
         const newGroup = await new groupModel(group);
